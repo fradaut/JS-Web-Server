@@ -25,3 +25,6 @@ dist-ssr
 
 # SSL
 *.pem
+
+#nohup
+nohup.out
