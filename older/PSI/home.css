@@ -1,0 +1,13 @@
+html, body{height: 100%;}
+header{width: 100%; height: 70px; position: fixed; background-color: rgb(243, 255, 175);}
+footer{height: 50px; background-color: lightgray;}
+#wrapper{min-height: 100%; margin-bottom: -50px; display: flex; flex-direction: column;}
+#content{display: flex; flex: 1;}
+.footer-content{height: 100%; display: flex; align-items: center; justify-content: center; font-family: serif;}
+
+#left{display: flex; flex-direction: column; align-items: flex-start;}
+#left-item{cursor: pointer; padding-top: 5px; color: rgba(0, 0, 0, 0.644);}
+#left-item:hover{display:inline-block;transform:scale(1.1);}
+#left-item:active{display:inline-block;transform:scale(1);}
+
+#data-frame{width: 100%;}

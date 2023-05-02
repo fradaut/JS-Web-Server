@@ -26,5 +26,8 @@ dist-ssr
 # SSL
 *.pem
 
-#nohup
+# nohup
 nohup.out
+
+# Backend
+backend/

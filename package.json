@@ -1,18 +1,18 @@
 {
-  "name": "js-web-server",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "vue3-jsweb",
+  "private": true,
+  "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
-  "keywords": [],
-  "author": "fradaut",
-  "license": "",
   "dependencies": {
-    "koa": "^2.14.2",
-    "koa-router": "^12.0.0"
+    "vue": "^3.2.47"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.1.0",
+    "vite": "^4.3.0"
   }
 }
