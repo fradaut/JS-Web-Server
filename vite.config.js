@@ -10,7 +10,8 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
-        vuesrc: resolve(__dirname, 'vuedoc/index.html'),
+        vuedoc: resolve(__dirname, 'vuedoc/index.html'),
+        minecraft: resolve(__dirname, 'minecraft/index.html'),
       }
     }
   }
