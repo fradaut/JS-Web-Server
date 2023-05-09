@@ -13,6 +13,7 @@ export default defineConfig({
         vuedoc: resolve(__dirname, 'vuedoc/index.html'),
         minecraft: resolve(__dirname, 'minecraft/index.html'),
         iot: resolve(__dirname, 'IoT/index.html'),
+        da: resolve(__dirname, 'dataAnalysis/index.html'),
       }
     }
   }

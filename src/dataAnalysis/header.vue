@@ -1,6 +1,7 @@
 <template>
-    <header class="header">
+    <header>
         <div class="title" @click="handleTitleClick">Title</div>
+        <upload />
         <nav class="nav">
             <NavLink label="Vue3" :to="vue" />
             <NavLink label="MC" :to="mc" />
@@ -10,14 +11,15 @@
         <div class="menu" @click="handleMenuClick">Menu</div>
     </header>
 </template>
-  
+
 <script setup>
     import NavLink from '../components/index/Nav.vue';
+    import upload from './upload.vue';
   
-    const vue = './vuedoc';
-    const mc = './minecraft';
-    const iot = './IoT';
-    const da = './dataAnalysis';
+    const vue = '#';
+    const mc = '#';
+    const iot = '#';
+    const da = '#';
   
     function handleTitleClick() {
         // Title click logic here
@@ -30,8 +32,8 @@
     }
 </script>
   
-<style scoped>
-    .header {
+<style scoped lang="scss">
+    header {
         display: flex;
         justify-content: space-between;
         align-items: center;

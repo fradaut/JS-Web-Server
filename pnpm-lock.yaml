@@ -1,6 +1,9 @@
 lockfileVersion: '6.0'
 
 dependencies:
+  plotly.js-dist-min:
+    specifier: ^2.22.0
+    version: 2.22.0
   sass:
     specifier: ^1.62.1
     version: 1.62.1
@@ -452,6 +455,10 @@ packages:
   /picomatch@2.3.1:
     resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
     engines: {node: '>=8.6'}
+
+  /plotly.js-dist-min@2.22.0:
+    resolution: {integrity: sha512-2b7w4CQI06px8HVpKpgZtfuoDjuCLA26VlgdnG71UDBrJvtCYvXb39H4ElNv+CA1bbD4S98KanpWPRqTqlxBZw==}
+    dev: false
 
   /postcss@8.4.23:
     resolution: {integrity: sha512-bQ3qMcpF6A/YjR55xtoTr0jGOlnPOKAIMdOWiv0EIT6HVPEaJiJB4NLljSbiHoC2RX7DN5Uvjtpbg1NPdwv1oA==}
