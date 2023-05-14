@@ -6,7 +6,7 @@
             </div>
         </div>
         <div class="upload-button"  @click="triggerFileInput">
-            <input type="file" ref="fileInput" @change="handleFileUpload" />
+            <input type="file" ref="fileInput" @change="handleFileUpload" accept=".csv" />
         </div>
     </div>
 </template>
@@ -26,7 +26,13 @@ export default {
         function handleFileUpload(event) {
             const [file] = event.target.files;
             if (file) {
-                uploadedFile.value = file;
+                // 檢查檔案類型
+                if (file.name.endsWith('.csv')) {
+                    uploadedFile.value = file;
+                } else {
+                    alert('請上傳一個 .csv 檔案');
+                    event.target.value = null; // 清除已選擇的非 .csv 檔案
+                }
             }
         }
 
