@@ -1,6 +1,6 @@
 <!-- src/pages/NewPage.vue -->
 <script setup>
-    import Header from './Header.vue'
+    import Header from './components/Header.vue'
 </script>
 
 <template>
@@ -12,7 +12,10 @@
 </template>
 
 <style scoped>
-.content {
-    margin-top: 45px;
-}
+    html {
+        font-family: "Noto Sans CJK TC", "Microsoft JhengHei", PingFang, STHeiti, sans-serif, serif;
+    }
+    .content {
+        margin-top: 45px;
+    }
 </style>

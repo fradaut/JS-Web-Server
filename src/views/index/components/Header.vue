@@ -12,7 +12,7 @@
 </template>
   
 <script setup>
-    import NavLink from '../components/index/Nav.vue';
+    import NavLink from './Nav.vue';
   
     const vue = './vuedoc';
     const mc = './minecraft';

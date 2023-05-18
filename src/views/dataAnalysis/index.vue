@@ -1,19 +1,4 @@
-<script setup>
-    import Header from './header.vue'
-    import { ref, onMounted } from 'vue';
-    import Plotly from 'plotly.js-dist-min';
-
-    const tester = ref(null);
-
-    onMounted(() => {
-        Plotly.newPlot(tester.value, [
-            {
-              x: [1, 2, 3, 4, 5],
-              y: [1, 2, 4, 8, 16],
-            },
-        ]);
-    });
-</script>
+<script src="./index.js"></script>
 
 <template>
     <Header />
@@ -23,6 +8,10 @@
 </template>
 
 <style scoped lang="scss">
+    html {
+    font-family: "Noto Sans CJK TC", "Microsoft JhengHei", PingFang, STHeiti, sans-serif, serif;
+    }
+    
     header {
         display: flex;
         justify-content: space-between;
