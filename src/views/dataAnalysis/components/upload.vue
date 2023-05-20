@@ -1,24 +1,12 @@
-<template>
-    <div class="file-upload">
-        <div class="file-info">
-            <div class="file-name" contenteditable="true" @focus="preventDefault" @keydown="preventDefault">
-                {{ uploadedFile?.name || 'No file selected' }}
-            </div>
-        </div>
-        <div class="upload-button"  @click="triggerFileInput">
-            <input type="file" ref="fileInput" @change="handleFileUpload" accept=".csv" />
-        </div>
-    </div>
-</template>
-
 <script>
 import { ref } from 'vue';
+import Papa from 'papaparse';
 
 export default {
     setup() {
         const uploadedFile = ref(null);
         const fileInput = ref(null);
-        
+            
         function triggerFileInput() {
             fileInput.value.click();
         }
@@ -50,6 +38,19 @@ export default {
     },
 };
 </script>
+
+<template>
+    <div class="file-upload">
+        <div class="file-info">
+            <div class="file-name" contenteditable="true" @focus="preventDefault" @keydown="preventDefault">
+                {{ uploadedFile?.name || 'No file selected.' }}
+            </div>
+        </div>
+        <div class="upload-button"  @click="triggerFileInput">
+            <input type="file" ref="fileInput" @change="handleFileUpload" accept=".csv" />
+        </div>
+    </div>
+</template>
 
 <style scoped lang="scss">
 .file-upload {

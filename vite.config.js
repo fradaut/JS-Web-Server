@@ -20,7 +20,7 @@ export default defineConfig({
         main: resolve(__dirname, 'src/views/index/index.html'),
         vuedoc: resolve(__dirname, 'src/views/vuedoc/index.html'),
         minecraft: resolve(__dirname, 'src/views/minecraft/index.html'),
-        // iot: resolve(__dirname, 'IoT/index.html'),
+        iot: resolve(__dirname, 'src/views/IoT/index.html'),
         da: resolve(__dirname, 'src/views/dataAnalysis/index.html'),
       }
     }

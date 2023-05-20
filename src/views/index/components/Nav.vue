@@ -1,27 +1,27 @@
+<script setup>
+import { ref } from 'vue';
+
+const props = defineProps({
+    label: String,
+    to: String,
+});
+
+const isHovered = ref(false);
+
+function handleMouseOver() {
+    isHovered.value = true;
+}
+
+function handleMouseOut() {
+    isHovered.value = false;
+}
+</script>
+
 <template>
     <a class="nav-item" :href="to" @click="handleClick" @mouseover="handleMouseOver" @mouseout="handleMouseOut">
         {{ label }}
     </a>
 </template>
-  
-<script setup>
-    import { ref } from 'vue';
-    
-    const props = defineProps({
-        label: String,
-        to: String,
-    });
-
-    const isHovered = ref(false);
-
-    function handleMouseOver() {
-        isHovered.value = true;
-    }
-
-    function handleMouseOut() {
-        isHovered.value = false;
-    }
-</script>
     
 <style scoped lang="scss">
 .nav-item {
