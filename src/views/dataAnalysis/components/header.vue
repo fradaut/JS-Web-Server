@@ -1,10 +1,12 @@
 <script setup>
-import upload from './upload.vue';
+import upload from './upload.vue'
+import axisSelection from './axisSelection.vue'
 </script>
 
 <template>
     <header>
         <upload />
+        <axisSelection />
     </header>
 </template>
   

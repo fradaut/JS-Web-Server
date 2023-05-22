@@ -1,41 +1,36 @@
-<script>
+<script setup>
 import { ref } from 'vue';
+import { useDataStore } from '../store/data';
 import Papa from 'papaparse';
 
-export default {
-    setup() {
-        const uploadedFile = ref(null);
-        const fileInput = ref(null);
-            
-        function triggerFileInput() {
-            fileInput.value.click();
-        }
-      
-        function handleFileUpload(event) {
-            const [file] = event.target.files;
-            if (file) {
-                // 檢查檔案類型
-                if (file.name.endsWith('.csv')) {
-                    uploadedFile.value = file;
-                } else {
-                    alert('請上傳一個 .csv 檔案');
-                    event.target.value = null; // 清除已選擇的非 .csv 檔案
-                }
-            }
-        }
+const store = useDataStore();
+const uploadedFile = ref(null);
+const fileInput = ref(null);
 
-        function preventDefault(e) {
-            e.preventDefault();
+const triggerFileInput = () => {
+    fileInput.value.click();
+};
+
+const handleFileUpload = (event) => {
+    const [file] = event.target.files;
+    if (file) {
+        // 檢查檔案類型
+        if (file.name.endsWith('.csv')) {
+            uploadedFile.value = file;
+            Papa.parse(file, {
+                complete: function(results) {
+                    store.setData(results.data);
+                }
+            });
+        } else {
+            alert('請上傳一個 .csv 檔案');
+            event.target.value = null; // 清除已選擇的非 .csv 檔案
         }
-      
-        return {
-            uploadedFile,
-            fileInput,
-            triggerFileInput,
-            handleFileUpload,
-            preventDefault,
-        };
-    },
+    }
+};
+
+const preventDefault = (e) => {
+    e.preventDefault();
 };
 </script>
 
