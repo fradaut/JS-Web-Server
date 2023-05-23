@@ -1,17 +1,14 @@
 <script setup>
-import { ref } from 'vue';
 import { useDataStore } from '../store/data';
 
 const dataStore = useDataStore();
-const selectedXField = ref('none');
-const selectedYField = ref('none');
 
 const updateXField = (event) => {
-    selectedXField.value = event.target.value;
+    dataStore.selectedXField = event.target.value;
 };
 
 const updateYField = (event) => {
-    selectedYField.value = event.target.value;
+    dataStore.selectedYField = event.target.value;
 };
 </script>
 
@@ -20,8 +17,8 @@ const updateYField = (event) => {
         <div>
             <label for="x-field">X軸: </label>
             <select id="x-field" v-model="selectedXField" @change="updateXField">
-                <option v-if="selectedXField === 'none'" value="none">選擇欄位</option>
-                <option v-for="(value, key) in dataStore.csvData[0]" :key="key" :value="value">
+                <option v-if="dataStore.selectedXField === 'none'" value="none">選擇欄位</option>
+                <option v-for="(value, key) in dataStore.csvData[0]" :key="key" :value="key">
                     {{ value }}
                 </option>
             </select>
@@ -29,8 +26,8 @@ const updateYField = (event) => {
         <div>
             <label for="y-field">Y軸: </label>
             <select id="y-field" v-model="selectedYField" @change="updateYField">
-            <option v-if="selectedYField === 'none'" value="none">選擇欄位</option>
-            <option v-for="(value, key) in dataStore.csvData[0]" :key="key" :value="value">
+            <option v-if="dataStore.selectedYField === 'none'" value="none">選擇欄位</option>
+            <option v-for="(value, key) in dataStore.csvData[0]" :key="key" :value="key">
                 {{ value }}
             </option>
         </select>

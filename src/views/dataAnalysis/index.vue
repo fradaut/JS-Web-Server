@@ -1,35 +1,37 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
-import Plotly from 'plotly.js-dist-min';
+// import Plotly from 'plotly.js-dist-min';
 import { useDataStore } from './store/data';
 import Header from './components/header.vue';
 
 const tester = ref(null);
 const store = useDataStore();
 
-const plotData = () => {
+const plotData = async () => {
     let data = store.csvData;
 
     // Check if tester.value and data are not null and data has elements
     if (tester.value && data && data.length > 0) {
-        let traces = [];
-        for (let i=1; i<data[0].length; i++) {
-            let trace = {
-                x: data.map(row => row[0]),
-                y: data.map(row => row[i]),
-                name: `Trace ${i}`,
-                type: 'scatter'
-            };
-            traces.push(trace);
-        }
+        const Plotly = await import('plotly.js-dist-min');
 
-        Plotly.newPlot(tester.value, traces);
+        let xData = data.map( row => row[store.selectedXField]);
+        let yData = data.map( row => row[store.selectedYField]);
+
+        let trace = {
+            x: xData,
+            y: yData,
+            name: `${store.selectedXField}`,
+            mode: `markers`,
+            type: 'scatter'
+        };
+
+        Plotly.default.newPlot(tester.value, [trace]);
     }
 };
 
 onMounted(() => {
     // Watch for changes in csvData and replot when it changes
-    watch(() => store.csvData, plotData, { immediate: true });
+    watch(() => [store.csvData, store.selectedXField, store.selectedYField], plotData, { immediate: true });
 
     plotData();
 });

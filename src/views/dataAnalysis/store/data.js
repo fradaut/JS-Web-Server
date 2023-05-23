@@ -4,6 +4,8 @@ export const useDataStore = defineStore({
     id: 'data',
     state: () => ({
         csvData: [],
+        selectedXField: 'none',
+        selectedYField: 'none',
     }),
     getters: {
         getColumns(state) {
