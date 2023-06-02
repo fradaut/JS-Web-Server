@@ -17,17 +17,13 @@ const plotData = async () => {
         let yData = data.map( row => row[store.selectedYField]);
 
         let trace = {
-            // x: xData,    
-            // y: yData,
-            // name: `${store.selectedXField}`,
-            // mode: `markers`,
             type: store.selectedChart,
         };
 
         switch (store.selectedChart) {
             case 'pie':
-                trace.values = xData;
-                trace.labels = `${store.selectedXField}`;
+                trace.values = yData;
+                trace.labels = xData;
                 break;
             case 'histogram':
                 trace.x = xData;
@@ -36,7 +32,11 @@ const plotData = async () => {
                 trace.x = xData;
                 trace.y = yData;
                 trace.name = `${store.selectedXField}`;
-                trace.mode = `markers`;
+                trace.mode = store.selectedMode;
+                break;
+            case 'bar':
+                trace.x = xData;
+                trace.y = yData;
                 break;
         }
 
@@ -52,7 +52,7 @@ const plotData = async () => {
 
 onMounted(() => {
     // Watch for changes in csvData and replot when it changes
-    watch(() => [store.csvData, store.selectedXField, store.selectedYField], plotData, { immediate: true });
+    watch(() => [store.csvData, store.selectedChart, store.selectedMode, store.selectedXField, store.selectedYField], plotData, { immediate: true });
 
     plotData();
 });
