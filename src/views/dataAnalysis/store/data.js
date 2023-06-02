@@ -8,6 +8,7 @@ export const useDataStore = defineStore({
         selectedYField: 'none',
         selectedChart: 'histogram',
         selectedMode: 'markers',
+        isLoading: false,
     }),
     getters: {
         getColumns(state) {

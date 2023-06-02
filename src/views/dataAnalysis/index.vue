@@ -7,6 +7,10 @@ const tester = ref(null);
 const store = useDataStore();
 
 const plotData = async () => {
+    const waiting = async () => {
+        store.isLoading = true;
+    };
+    await waiting();
     let data = store.csvData;
 
     // Check if tester.value and data are not null and data has elements
@@ -48,6 +52,7 @@ const plotData = async () => {
 
         Plotly.default.newPlot(tester.value, [trace], layout, config);
     }
+    store.isLoading = false;
 };
 
 onMounted(() => {

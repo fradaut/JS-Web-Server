@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import { useDataStore } from '../store/data';
 import Papa from 'papaparse';
+import spinner from './spinner.vue';
 
 const store = useDataStore();
 const uploadedFile = ref(null);
@@ -12,6 +13,8 @@ const triggerFileInput = () => {
 };
 
 const handleFileUpload = (event) => {
+    store.isLoading = true;
+
     const [file] = event.target.files;
     if (file) {
         // 檢查檔案類型
@@ -27,6 +30,7 @@ const handleFileUpload = (event) => {
             event.target.value = null; // 清除已選擇的非 .csv 檔案
         }
     }
+    store.isLoading = false;
 };
 
 const preventDefault = (e) => {
@@ -44,6 +48,7 @@ const preventDefault = (e) => {
         <div class="upload-button"  @click="triggerFileInput">
             <input type="file" ref="fileInput" @change="handleFileUpload" accept=".csv" />
         </div>
+        <spinner/>
     </div>
 </template>
 
