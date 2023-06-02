@@ -6,6 +6,7 @@ export const useDataStore = defineStore({
         csvData: [],
         selectedXField: 'none',
         selectedYField: 'none',
+        selectedChart: 'histogram',
     }),
     getters: {
         getColumns(state) {

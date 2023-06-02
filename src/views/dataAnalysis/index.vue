@@ -1,6 +1,5 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
-// import Plotly from 'plotly.js-dist-min';
 import { useDataStore } from './store/data';
 import Header from './components/header.vue';
 
@@ -18,14 +17,36 @@ const plotData = async () => {
         let yData = data.map( row => row[store.selectedYField]);
 
         let trace = {
-            x: xData,
-            y: yData,
-            name: `${store.selectedXField}`,
-            mode: `markers`,
-            type: 'scatter'
+            // x: xData,    
+            // y: yData,
+            // name: `${store.selectedXField}`,
+            // mode: `markers`,
+            type: store.selectedChart,
         };
 
-        Plotly.default.newPlot(tester.value, [trace]);
+        switch (store.selectedChart) {
+            case 'pie':
+                trace.values = xData;
+                trace.labels = `${store.selectedXField}`;
+                break;
+            case 'histogram':
+                trace.x = xData;
+                break;
+            case 'scatter':
+                trace.x = xData;
+                trace.y = yData;
+                trace.name = `${store.selectedXField}`;
+                trace.mode = `markers`;
+                break;
+        }
+
+        let layout = {
+            autosize: true,
+        };
+
+        let config = {responsive: true};
+
+        Plotly.default.newPlot(tester.value, [trace], layout, config);
     }
 };
 
@@ -40,15 +61,11 @@ onMounted(() => {
 <template>
     <Header />
     <div class="content">
-        <div id="tester" ref="tester" style="width:600px;height:250px;"></div>
+        <div id="tester" ref="tester"></div>
     </div>
 </template>
 
 <style scoped lang="scss">
-html {
-    font-family: "Noto Sans CJK TC", "Microsoft JhengHei", PingFang, STHeiti, sans-serif, serif;
-}
-
 header {
     display: flex;
     justify-content: space-between;
@@ -65,5 +82,10 @@ header {
 
 .content {
     margin-top: 45px;
+    height: calc(100% - 45px);
+    #tester {
+        width: 100%;
+        height: 100%;
+    }
 }
 </style>

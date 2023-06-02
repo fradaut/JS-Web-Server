@@ -10,10 +10,22 @@ const updateXField = (event) => {
 const updateYField = (event) => {
     dataStore.selectedYField = event.target.value;
 };
+
+const charts = ['pie', 'histogram', 
+                'scatter'];
+const hideAxisY = ['pie', 'histogram'];
 </script>
 
 <template>
     <div> <!-- 这里把<header>改为<div> -->
+        <div>
+            <label for="chart-type">Charts: </label>
+            <select id="chart-type" v-model="dataStore.selectedChart">
+                <option v-for="chart in charts" :key="chart" :value="chart">
+                    {{ chart }}
+                </option>
+            </select>
+        </div>
         <div>
             <label for="x-field">X軸: </label>
             <select id="x-field" v-model="selectedXField" @change="updateXField">
@@ -23,7 +35,7 @@ const updateYField = (event) => {
                 </option>
             </select>
         </div>
-        <div>
+        <div v-show="!hideAxisY.includes(dataStore.selectedChart)">
             <label for="y-field">Y軸: </label>
             <select id="y-field" v-model="selectedYField" @change="updateYField">
             <option v-if="dataStore.selectedYField === 'none'" value="none">選擇欄位</option>
