@@ -1,9 +1,10 @@
 <script setup>
 import { useDataStore } from '../store/data';
 import { computed } from 'vue';
+import filterbox from './filterbox.vue';
 
 const xAxisLabel = computed(() => {
-    switch (dataStore.selectedChart) {
+    switch (store.selectedChart) {
         case 'pie':
             return '名稱';
         case 'histogram':
@@ -14,7 +15,7 @@ const xAxisLabel = computed(() => {
 });
 
 const yAxisLabel = computed(() => {
-    switch (dataStore.selectedChart) {
+    switch (store.selectedChart) {
         case 'pie':
             return '數值';
         default:
@@ -22,15 +23,7 @@ const yAxisLabel = computed(() => {
     }
 });
 
-const dataStore = useDataStore();
-
-const updateXField = (event) => {
-    dataStore.selectedXField = event.target.value;
-};
-
-const updateYField = (event) => {
-    dataStore.selectedYField = event.target.value;
-};
+const store = useDataStore();
 
 const modes = ['markers', 'lines', 'lines+markers'];
 
@@ -43,7 +36,8 @@ const hideAxisY = ['histogram'];
     <div> <!-- 这里把<header>改为<div> -->
         <div>
             <label for="chart-type">Charts: </label>
-            <select id="chart-type" v-model="dataStore.selectedChart">
+            <select id="chart-type" v-model="store.selectedChart">
+                <option v-if="store.selectedChart === 'none'" value="none">選擇圖表</option>
                 <option v-for="chart in charts" :key="chart" :value="chart">
                     {{ chart }}
                 </option>
@@ -51,30 +45,31 @@ const hideAxisY = ['histogram'];
         </div>
         <div>
             <label for="x-field">{{ xAxisLabel }}: </label>
-            <select id="x-field" v-model="selectedXField" @change="updateXField">
-                <option v-if="dataStore.selectedXField === 'none'" value="none">選擇欄位</option>
-                <option v-for="(value, key) in dataStore.csvData[0]" :key="key" :value="key">
+            <select id="x-field" v-model="store.selectedXField">
+                <option v-if="store.selectedXField === 'none'" value="none">選擇欄位</option>
+                <option v-for="(value, key) in store.csvData[0]" :key="key" :value="key">
                     {{ value }}
                 </option>
             </select>
         </div>
-        <div v-show="!hideAxisY.includes(dataStore.selectedChart)">
+        <div v-show="!hideAxisY.includes(store.selectedChart) && !store.filterFlag">
             <label for="y-field">{{ yAxisLabel }}: </label>
-            <select id="y-field" v-model="selectedYField" @change="updateYField">
-            <option v-if="dataStore.selectedYField === 'none'" value="none">選擇欄位</option>
-            <option v-for="(value, key) in dataStore.csvData[0]" :key="key" :value="key">
-                {{ value }}
-            </option>
-        </select>
+            <select id="y-field" v-model="store.selectedYField">
+                <option v-if="store.selectedYField === 'none'" value="none">選擇欄位</option>
+                <option v-for="(value, key) in store.csvData[0]" :key="key" :value="key">
+                    {{ value }}
+                </option>
+            </select>
         </div>
-        <div v-show="dataStore.selectedChart === 'scatter'">
+        <div v-show="store.selectedChart === 'scatter'">
             <label for="chart-mode">Mode: </label>
-            <select id="chart-mode" v-model="dataStore.selectedMode">
+            <select id="chart-mode" v-model="store.selectedMode">
                 <option v-for="mode in modes" :key="mode" :value="mode">
                     {{ mode }}
                 </option>
             </select>
         </div>
+        <filterbox/>
     </div>
 </template>
 

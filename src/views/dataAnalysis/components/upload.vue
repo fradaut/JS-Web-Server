@@ -32,16 +32,12 @@ const handleFileUpload = (event) => {
     }
     store.isLoading = false;
 };
-
-const preventDefault = (e) => {
-    e.preventDefault();
-};
 </script>
 
 <template>
     <div class="file-upload">
         <div class="file-info">
-            <div class="file-name" contenteditable="true" @focus="preventDefault" @keydown="preventDefault">
+            <div class="file-name" contenteditable="false">
                 {{ uploadedFile?.name || 'No file selected.' }}
             </div>
         </div>

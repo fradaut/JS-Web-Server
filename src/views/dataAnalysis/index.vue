@@ -20,6 +20,20 @@ const plotData = async () => {
         let xData = data.map( row => row[store.selectedXField]);
         let yData = data.map( row => row[store.selectedYField]);
 
+        if (store.filterFlag) {
+            let counter = {};
+            xData.forEach(val => {
+                if (val) {
+                    val.split(';').forEach(item => {
+                        item = item.trim().toLowerCase();
+                        counter[item] = (counter[item] || 0) + 1;
+                    });
+                }
+            });
+            xData = Object.keys(counter);
+            yData = Object.values(counter);
+        }
+
         let trace = {
             type: store.selectedChart,
         };
@@ -30,7 +44,7 @@ const plotData = async () => {
                 trace.labels = xData;
                 break;
             case 'histogram':
-                trace.x = xData;
+                trace.x = yData;
                 break;
             case 'scatter':
                 trace.x = xData;
@@ -57,7 +71,7 @@ const plotData = async () => {
 
 onMounted(() => {
     // Watch for changes in csvData and replot when it changes
-    watch(() => [store.csvData, store.selectedChart, store.selectedMode, store.selectedXField, store.selectedYField], plotData, { immediate: true });
+    watch(() => [store.csvData, store.selectedChart, store.selectedMode, store.selectedXField, store.selectedYField, store.filterFlag], plotData, { immediate: true });
 
     plotData();
 });

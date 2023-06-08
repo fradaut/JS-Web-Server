@@ -1,11 +1,15 @@
 <script setup>
 import upload from './upload.vue'
 import axisSelection from './axisSelection.vue'
+import titletext from './titletext.vue'
 </script>
 
 <template>
     <header>
-        <upload />
+        <div class="left-section">
+            <titletext />
+            <upload />
+        </div>
         <axisSelection />
     </header>
 </template>
@@ -23,5 +27,10 @@ header {
     background-color: #ffd9e6;
     padding: 0 20px;
     box-sizing: border-box;
+}
+.left-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 </style>
